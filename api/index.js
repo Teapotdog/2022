@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://ashy-wave-0b2044d00.4.azurestaticapps.net",
   })
 );
 app.use(cookieParser());
