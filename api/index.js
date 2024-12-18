@@ -10,6 +10,7 @@ import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 
+
 //middlewares
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://ashy-wave-0b2044d00.4.azurestaticapps.net",
   })
 );
 app.use(cookieParser());
