@@ -16,19 +16,18 @@ const Update = ({ setOpenUpdate, user }) => {
   });
 
   const upload = async (file) => {
-    console.log(file)
     try {
       const formData = new FormData();
       formData.append("file", file);
       const res = await makeRequest.post("/upload", formData);
       return res.data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   const handleChange = (e) => {
-    setTexts((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+    setTexts((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const queryClient = useQueryClient();
@@ -48,17 +47,17 @@ const Update = ({ setOpenUpdate, user }) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    //TODO: find a better way to get image URL
-    
-    let coverUrl;
-    let profileUrl;
-    coverUrl = cover ? await upload(cover) : user.coverPic;
-    profileUrl = profile ? await upload(profile) : user.profilePic;
-    
+    // TODO: Find a better way to get image URL
+    let coverUrl = cover ? await upload(cover) : user.coverPic;
+    let profileUrl = profile ? await upload(profile) : user.profilePic;
+
     mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
+
+    // Reset state and close the update form
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
+  };
 
   return (
     <div className="update">
@@ -145,7 +144,7 @@ const Update = ({ setOpenUpdate, user }) => {
           <button onClick={handleClick}>Update</button>
         </form>
         <button className="close" onClick={() => setOpenUpdate(false)}>
-          close
+          Close
         </button>
       </div>
     </div>
