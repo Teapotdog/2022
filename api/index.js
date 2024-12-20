@@ -24,6 +24,10 @@ app.use(
 );
 app.use(cookieParser());
 
+app.get("/api/endpoint", (req, res) => {
+  res.json({ message: "Hello from the backend!" });
+});
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/upload");
