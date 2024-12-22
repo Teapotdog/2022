@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const makeRequest = axios.create({
-  baseURL: "http://byd-dvaeh0d5bwh7g5a0.australiaeast-01.azurewebsites.net/routes",
+  baseURL: "http://localhost:3000",
   withCredentials: true,
 });
 fetch("http://byd-dvaeh0d5bwh7g5a0.australiaeast-01.azurewebsites.net/routes", {
