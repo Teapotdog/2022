@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - BYD
+name: Build and deploy Node.js app to Azure Web App - byd1370
 
 on:
   push:
@@ -58,15 +58,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_894E7F2605374D3C8B81AB5D9FB7273E }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_776810223E074F27AD8FFF8244A270E5 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E48272B5BE0D46D08787854AFF90AEB1 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FB76DD88E3F14DA0AABC291FFE8DA8A9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_78A8F3AE940D4362835A1D2421E55CEB }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B8C66B22B04E4D9CA2F6854D1B69584D }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'BYD'
+          app-name: 'byd1370'
           slot-name: 'Production'
           package: .
           
