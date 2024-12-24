@@ -36,13 +36,6 @@ jobs:
            login-server: 'byd1370.azurecr.io'
 
            
-      - name: Build and push FrontEnd client Docker images
-        uses: docker/build-push-action@v6.9.0
-        with:
-           push: true
-           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
-           file: ./client/Dockerfile
-           
       - name: Build and push Backend Docker images
         uses: docker/build-push-action@v6.9.0
         with:
