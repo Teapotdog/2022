@@ -3,7 +3,7 @@ name: Build and deploy a container to an Azure Web App
 env:
   AZURE_CONTAINER_REGISTRY_NAME: "BYD1370"
   AZURE_CONTAINER_REGISTRY: "byd1370.azurecr.io"
-  CONTAINER_NAME: "BYD1370"
+  CONTAINER_NAME: "byd1370"
   RESOURCE_GROUP: "1"
   CLUSTER_NAME: "BYD1370"
 on:
