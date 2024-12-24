@@ -5,7 +5,7 @@ FROM node:16-alpine
 WORKDIR /client
 
 # Copy package.json and package-lock.json files
-COPY package*.json ./
+COPY package*.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
