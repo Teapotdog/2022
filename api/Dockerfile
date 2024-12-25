@@ -1,14 +1,11 @@
 # Use Node.js base image
 FROM node:16-alpine
 
-# Set the working directory inside the container
-WORKDIR /api
+WORKDIR /app
 
-# Copy only the package.json and package-lock.json files first
-COPY package*.json ./
+COPY ["package.json", "package-lock.json*", "./"]
 
-# Install dependencies
-RUN npm install
+RUN npm install --production
 
 # Copy the rest of the application source code
 COPY . .
