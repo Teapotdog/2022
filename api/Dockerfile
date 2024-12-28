@@ -1,15 +1,15 @@
 # Use Node.js base image
 FROM node:16-alpine
 
-WORKDIR /app
+WORKDIR /app/api
 
-COPY COPY package.json ./
+COPY COPY api/package.json ./
 
 
 RUN npm install --production
 
 # Copy the rest of the application source code
-COPY . .
+COPY api/ ./
 
 # Expose the application port (adjust as needed)
 EXPOSE 3000
