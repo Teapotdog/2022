@@ -49,3 +49,21 @@ jobs:
            push: true
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
            file: ./api/Dockerfile
+
+Deploy to Azure Container app:
+    needs: [buildContainerImage]
+    steps:
+    
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          imageToDeploy: '${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}'
+          resourceGroup: 'RESOURCE_GROUP'
+          containerAppName: '${{ env.CONTAINER_NAME }}'
+
+           
