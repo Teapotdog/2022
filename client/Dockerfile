@@ -2,16 +2,16 @@
 FROM node:16-alpine
 
 # Set the working directory in the container
-WORKDIR ./client
+WORKDIR /app/client
 
 # Copy package.json and package-lock.json files
-COPY package*.json ./
+COPY client/package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the application source code
-COPY . .
+COPY client/ ./ 
 
 # Expose the port the application runs on
 EXPOSE 3000
