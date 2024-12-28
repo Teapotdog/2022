@@ -50,14 +50,21 @@ jobs:
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
            file: ./api/Dockerfile
 
-Deploy to Azure Container app:
+  Deploytoazurecontainerapp:
+    runs-on: ubuntu-latest
     needs: [buildContainerImage]
     steps:
     
-      - name: Log in to Azure
-        uses: azure/login@v1
+      - name: Azure Login
+        uses: azure/login@v2
+        env:
+          AZURE_LOGIN_PRE_CLEANUP: ${{ startsWith(runner.name, 'GitHub Actions') }}
+          AZURE_LOGIN_POST_CLEANUP: ${{ startsWith(runner.name, 'GitHub Actions') }}
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true    
     
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
