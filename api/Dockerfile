@@ -3,7 +3,7 @@ FROM node:16-alpine
 
 WORKDIR /app/api
 
-COPY COPY api/package.json ./
+COPY api/package.json ./
 
 
 RUN npm install --production
@@ -15,4 +15,4 @@ COPY api/ ./
 EXPOSE 3000
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
