@@ -36,10 +36,16 @@ jobs:
            # Container registry server url
            login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}
 
-      - name: Build and push Docker images
+      - name: Build and push Frontend Docker images
         uses: docker/build-push-action@v6.9.0
         with:
            push: true
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
            file: ./client/Dockerfile
-          
+
+      - name: Build and push Backend Docker images
+        uses: docker/build-push-action@v6.9.0
+        with:
+           push: true
+           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+           file: ./api/Dockerfile
