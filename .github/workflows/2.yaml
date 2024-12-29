@@ -51,7 +51,14 @@ jobs:
            file: ./api/Dockerfile
 
   Deploytoazurecontainerapp:
+
+  
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    
     needs: [buildContainerImage]
     steps:
 
