@@ -2,7 +2,7 @@
 name: Build and Deploy to Azure
 
 env:
-  AZURE_CONTAINER_REGISTRY_NAME: "BYD1371"
+  AZURE_CONTAINER_REGISTRY_NAME: "byd1371"
   AZURE_CONTAINER_REGISTRY: "byd1371.azurecr.io"
   CONTAINER_NAME: "frontend"
   RESOURCE_GROUP: "1"
