@@ -61,7 +61,9 @@ jobs:
     
     needs: [buildContainerImage]
     steps:
-
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+        
       - name: Log in to Azure
         uses: azure/login@v1
         with:
