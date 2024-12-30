@@ -43,13 +43,6 @@ jobs:
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
            file: ./client/Dockerfile
 
-      - name: Build and push Backend Docker images
-        uses: docker/build-push-action@v6.9.0
-        with:
-           push: true
-           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
-           file: ./api/Dockerfile
-
   Deploytoazurecontainerapp:
       runs-on: ubuntu-latest
       permissions:
@@ -74,7 +67,6 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}
           acrName: 'byd1371'
           imageToBuild: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
 
