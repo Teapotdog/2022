@@ -68,6 +68,8 @@ jobs:
         uses: azure/container-apps-deploy-action@v1
         with:
           imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          resourceGroup: '1'
+          containerAppName: "frontend"
 
 
 
