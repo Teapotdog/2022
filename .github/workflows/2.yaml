@@ -50,4 +50,40 @@ jobs:
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
            file: ./api/Dockerfile
 
+  Deploytoazurecontainerapp:
+      runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        id-token: write
+      environment: production
+      needs: [buildContainerImage]
+     
+      
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
 
+      - name: Azure Login
+        uses: Azure/login@v2.2.0
+        with:
+          client-id: '429a9a2c-b403-4532-8822-93a7425d56f1'
+          tenant-id: '522316bf-80fd-435f-97bc-f74fab0b6188'
+          subscription-id: '0903c605-8b86-400b-9502-a2969a03e8d2'
+
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}
+          acrName: 'byd1371'
+          imageToBuild: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+
+
+
+
+
+
+
+
+
+        
