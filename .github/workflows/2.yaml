@@ -64,13 +64,12 @@ jobs:
           tenant-id: '522316bf-80fd-435f-97bc-f74fab0b6188'
           subscription-id: '0903c605-8b86-400b-9502-a2969a03e8d2'
 
-      - name: Build and deploy Container App
-        uses: azure/container-apps-deploy-action@v1
-        with:
-          imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
-          resourceGroup: '1'
-          containerAppName: "frontend"
-
+      - name: Deploy to Azure Container App
+      run: |
+        az containerapp update \
+          --name frontend \
+          --resource-group 1 \
+          --image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
 
 
 
