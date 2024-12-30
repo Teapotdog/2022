@@ -70,6 +70,6 @@ jobs:
         with:
           appSourcePath: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
           acrName: 'byd1371'
-
+          resourceGroup: "1"
 
         
