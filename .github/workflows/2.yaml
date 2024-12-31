@@ -68,7 +68,7 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          appSourcePath: ./client/Dockerfile
           acrName: 'byd1371'
           resourceGroup: "1"
 
