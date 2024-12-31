@@ -5,7 +5,7 @@ env:
   CONTAINER_NAME: "frontend"
   RESOURCE_GROUP: "1"
   CONTAINER_APP_NAME: "frontend"  # Added missing env variable
-  CONTAINER_APP_ENVIRONMENT: "your-environment-name"  # Added missing env variable
+
 
 on:
   push: 
@@ -35,7 +35,7 @@ jobs:
       - name: Build and push Frontend Docker images
         uses: docker/build-push-action@v6.9.0
         with:
-          context: ./client  # Added context to match Dockerfile location
+          context: ./client/Dockerfile  # Added context to match Dockerfile location
           push: true
           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
           file: ./client/Dockerfile
