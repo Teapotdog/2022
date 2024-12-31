@@ -1,11 +1,11 @@
+
 name: Build and Deploy to Azure
+
 env:
   AZURE_CONTAINER_REGISTRY_NAME: "byd1371"
   AZURE_CONTAINER_REGISTRY: "byd1371.azurecr.io"
   CONTAINER_NAME: "frontend"
   RESOURCE_GROUP: "1"
-  CONTAINER_APP_NAME: "frontend"  # Added missing env variable
-
 
 on:
   push: 
@@ -18,45 +18,52 @@ permissions:
 jobs:
   buildContainerImage:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.1
-        
-      - name: Set up Docker Buildx
+
+      - name: Set up Docker Builx
         uses: docker/setup-buildx-action@v3.7.1
-        
+
       - name: Azure Container Registry Login
         uses: Azure/docker-login@v1
         with:
-          username: ${{ env.AZURE_CONTAINER_REGISTRY_NAME }}
-          password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
-          login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}
-          
+           # Container registry username
+           username: ${{ env.AZURE_CONTAINER_REGISTRY_NAME }}
+           # Container registry password
+           password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+           # Container registry server url
+           login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}
+
       - name: Build and push Frontend Docker images
         uses: docker/build-push-action@v6.9.0
         with:
-          context: ./client/Dockerfile  # Added context to match Dockerfile location
           push: true
           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
           file: ./client/Dockerfile
 
-  deployToAzureContainerApp:
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      id-token: write
-    environment: production
-    needs: [buildContainerImage]
-    
-    steps:
+  Deploytoazurecontainerapp:
+      runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        id-token: write
+      environment: production
+      needs: [buildContainerImage]
+     
+      
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
       - name: Azure Login
         uses: Azure/login@v2.2.0
         with:
           client-id: '429a9a2c-b403-4532-8822-93a7425d56f1'
           tenant-id: '522316bf-80fd-435f-97bc-f74fab0b6188'
           subscription-id: '0903c605-8b86-400b-9502-a2969a03e8d2'
-      
+
       - name: Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v1
         with:
